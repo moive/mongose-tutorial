@@ -74,3 +74,18 @@ show tables
 -- insert document in collection 'cards'
 var d = {"title":"A card"}
 db.cards.insertOne(d)
+
+
+-- insert 1000 documents in collections 'cards'
+for(var i = 0; i < 100; i++){
+	var d = {
+		"title": "Card # " + (i+1),
+		"random1":Math.trunc(Math.random() * 1000),
+		"random2":Math.trunc(Math.random() * 1000),
+		"random3":Math.trunc(Math.random() * 1000),
+	};
+
+	db.cards.insertOne(d);
+}
+-- display count all documents in cards
+db.cards.countDocuments();
