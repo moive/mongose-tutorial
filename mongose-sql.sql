@@ -149,3 +149,11 @@ var n = {
 }
 
 db.products.insertOne(n)
+
+--search q = {"activePrinciple":"cafeina"}
+db.products.find({"activePrinciple":"cafeina"})
+
+-- search complex
+
+var q = {"$or": [{"almacenes.stock": {$lt: 10}},{"almacenes.stock": {$gt: 200}}]}
+db.products.find(q)
