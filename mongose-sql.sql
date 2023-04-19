@@ -55,3 +55,22 @@ db.usuarios.count(query)
 var query = {"colores": ["verde", "rojo"]} -- buscar "verde" y "rojo"
 db.usuarios.find(query)
 db.usuarios.count(query)
+
+
+--display all databases
+show dbs
+
+-- create database
+use kanban
+
+--create new collection
+db.createCollection('cards')
+
+-- display collection
+show collection
+-- or
+show tables
+
+-- insert document in collection 'cards'
+var d = {"title":"A card"}
+db.cards.insertOne(d)
