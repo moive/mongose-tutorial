@@ -109,3 +109,43 @@ db.cards.find({"random3": {$lte: 100}})
 
 -- In SQL: select * from cards where random3 <> 100
 db.cards.find({"random3": {$ne: 100}})
+
+
+-- create object
+var n = {
+	"sku": "000012123",
+	"product": "Acetaminofen",
+	"activePrinciple": ["acetaminofen", "dextrometorfano"],
+	"almacenes": [
+		{"store":"main", "stock": 10},
+		{"store":"branch 1", "stock": 50},
+	]
+}
+
+--create and insert n in products collection
+db.products.insertOne(n)
+
+--other register
+var n = {
+	"sku": "0000121111",
+	"product": "Migradoxina",
+	"activePrinciple": ["cafeina", "amoxilina"],
+	"almacenes": [
+		{"store":"main", "stock": 40},
+		{"store":"branch 1", "stock": 10},
+	]
+}
+
+db.products.insertOne(n)
+
+var n = {
+	"sku": "0000121001",
+	"product": "Clavulin",
+	"activePrinciple": ["amoxicilina", "acido clavulinico"],
+	"almacenes": [
+		{"store":"main", "stock": 400},
+		{"store":"branch 1", "stock": 210},
+	]
+}
+
+db.products.insertOne(n)
