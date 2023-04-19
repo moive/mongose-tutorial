@@ -89,3 +89,23 @@ for(var i = 0; i < 100; i++){
 }
 -- display count all documents in cards
 db.cards.countDocuments();
+
+-- In SQL: select * from cards where random3 > 900
+db.cards.find({"random3": {$gt: 900}})
+
+-- In SQL: select * from cards where random3 >= 900
+db.cards.find({"random3": {$gte: 900}})
+
+-- shows numbers of elements according to search
+db.cards.countDocuments({"random3": {$gt: 900}})
+
+
+-- In SQL: select * from cards where random3 < 100
+db.cards.find({"random3": {$lt: 100}})
+
+-- In SQL: select * from cards where random3 <= 100
+db.cards.find({"random3": {$lte: 100}})
+
+
+-- In SQL: select * from cards where random3 <> 100
+db.cards.find({"random3": {$ne: 100}})
