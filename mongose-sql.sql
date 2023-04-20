@@ -157,3 +157,21 @@ db.products.find({"activePrinciple":"cafeina"})
 
 var q = {"$or": [{"almacenes.stock": {$lt: 10}},{"almacenes.stock": {$gt: 200}}]}
 db.products.find(q)
+
+-- update data
+
+-- insert 3 times: {"a":1,"b":2,"c":3} in db.updatecol
+db.updatecol.insertOne({"a":1,"b":2,"c":3})
+
+--search with objectId
+var q = {"_id": ObjectId("644079e2ab2e4d925acbb4ff")}
+
+--or
+var q = {"_id": new ObjectId("644079e2ab2e4d925acbb4ff")}
+
+-- update value
+db.updatecol.updateOne(q, {$set:{"a":10, "b":20, "c": 60}})
+
+-- other way
+-- { new: true } return new value
+db.updatecol.findOneAndUpdate(q, {$set:{"a":110,"b":75}},{new: true})
