@@ -175,3 +175,17 @@ db.updatecol.updateOne(q, {$set:{"a":10, "b":20, "c": 60}})
 -- other way
 -- { new: true } return new value
 db.updatecol.findOneAndUpdate(q, {$set:{"a":110,"b":75}},{new: true})
+
+-- increment {$inc: {c:2}}
+db.updatecol.updateOne(q,{$inc: {c:2}})
+
+--add new element to array $push
+-- {
+--     _id: ObjectId("644079e2ab2e4d925acbb4ff"),
+--     a: 110,
+--     b: 75,
+--     c: 64,
+--     d: [ 'hello', 'bye' ]
+-- }
+db.updatecol.updateOne(q,{$push: {d:"hello"}})
+db.updatecol.updateOne(q,{$push: {d:"bye"}})
