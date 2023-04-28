@@ -37,7 +37,8 @@ db.getCollection('respartidores').aggregate([
 			from: "restaurantes",
 			localField: "idRestaurante",
 			foreignField: "_id",
-			as: "restaurante"
+			as: "restaurante" -- show option as array
 		}
-	}
+	},
+	{ $unwind: "$restaurante" } -- show restaurante as object
 ])
