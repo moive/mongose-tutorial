@@ -211,3 +211,28 @@ db.alumnos.aggregate([
     }
 }
 ])
+
+--https://www.youtube.com/watch?v=BKXrHik2JrE&list=PLpk46uAL3qUG3NYfYJkmREZGCX5yM3P7u&index=7
+
+-- https://www.youtube.com/watch?v=sO7Hc87Ublc
+-- insert item by codigo facilito
+db.items.insertMany([
+{item: 'caja', valor: 100, existencia: 20},
+{item: 'caja', valor: 50, existencia: 25},
+{item: 'latas', valor: 450, existencia: 10},
+{item: 'botellas', valor: 50, existencia: 150}
+])
+
+-- order by $group 
+db.items.aggregate([
+{
+    $group: {_id: '$item', repetidos: {$sum: 1}}
+}
+])
+
+-- sum valor and average valor
+db.items.aggregate([
+{
+    $group: {_id: '$item', repetidos: {$sum: 1}, subTotal: {$sum: '$valor'}, promedio: {$avg: '$valor'}}
+}
+])
