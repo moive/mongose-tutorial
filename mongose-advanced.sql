@@ -236,3 +236,38 @@ db.items.aggregate([
     $group: {_id: '$item', repetidos: {$sum: 1}, subTotal: {$sum: '$valor'}, promedio: {$avg: '$valor'}}
 }
 ])
+
+db.getCollection("EduSurvey").insertMany([
+    {Name:'JB institute', About:'This is good one collage for MBA', Information:'This $%%institute ##has good faculty etc$$'},
+    {Name:'MK institute', About:'This is good one collage for MCA', Information:'This$$%# is the dummy text12'},
+    {Name:'MG institute', About:'This is good one collage for B,Tech', Information:'This# institute@ has&* good infrastructure'}
+])
+
+db.getCollection('EduSurvey').aggregate(
+    [ 
+        { $project : { Name : 1 , About : 1,Information:1 } } 
+    ]
+)
+.forEach(function(doc,Index) {
+    doc.Information = doc.Information.replace(/[^a-zA-Z 0-9 ]/g, ''); 
+    db.EduSurvey.update({ "_id": doc._id },{ "$set": { "Information": doc.Information } });
+});
+
+db.getCollection('EduSurvey').aggregate([ { $project : { Name : 1 , About : 1,Information:1 } } ])
+
+-- https://www.youtube.com/watch?v=r5A_ApY2DLw min:55
+-- import mongodb sales.json
+-- url https://raw.githubusercontent.com/neelabalan/mongodb-sample-dataset/main/sample_supplies/sales.json
+-- line comand for import data
+-- mongoimport --db stores --collection sales --file sales.json
+
+-- show only saleDate
+db.sales.find({}, {saleDate: 1})
+-- show same day 2015-03-23
+db.sales.find({"$and": [{"saleDate": {"$gte": ISODate("2015-03-23T00:00:00")}}, {"saleDate": {"$lte": ISODate("2015-03-23T23:59:59")}}]}, {saleDate: 1, customer: 1, purchaseMethod: 1}).sort({saleDate: 1})
+
+-- expression short
+let dateStart = ISODate("2015-03-23T00:00:00")
+let dateEnd = ISODate("2015-03-23T23:59:59")
+
+db.sales.find({$and: [{"saleDate": {$gte: dateStart}},{"saleDate": {$lte: dateEnd}}], "customer.gender":"F"},{saleDate: 1, customer: 1, purchaseMethod: 1});
